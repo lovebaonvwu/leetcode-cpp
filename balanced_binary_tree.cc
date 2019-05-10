@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+ public:
+  bool isBalanced(TreeNode* root) {
+    if (!root)
+      return true;
+
+    int lh = treeHeight(root->left);
+    int rh = treeHeight(root->right);
+    bool sub_tree_is_balanced = (lh - rh <= 1) && (lh - rh >= -1);
+
+    return sub_tree_is_balanced && isBalanced(root->left) &&
+           isBalanced(root->right);
+  }
+
+  int treeHeight(TreeNode* root) {
+    if (!root)
+      return 0;
+
+    int lh = treeHeight(root->left);
+    int rh = treeHeight(root->right);
+
+    return 1 + (lh > rh ? lh : rh);
+  }
+};
