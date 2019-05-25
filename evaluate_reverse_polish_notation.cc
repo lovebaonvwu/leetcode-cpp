@@ -1,6 +1,38 @@
 class Solution {
  public:
   int evalRPN(vector<string>& tokens) {
+    unordered_set<string> st{"+", "-", "*", "/"};
+    stack<int> stk;
+
+    for (auto& t : tokens) {
+      if (st.count(t) == 0) {
+        stk.push(stoi(t));
+      } else {
+        int t1 = stk.top();
+        stk.pop();
+
+        int t2 = stk.top();
+        stk.pop();
+
+        if (t == "+") {
+          stk.push(t2 + t1);
+        } else if (t == "-") {
+          stk.push(t2 - t1);
+        } else if (t == "*") {
+          stk.push(t2 * t1);
+        } else {
+          stk.push(t2 / t1);
+        }
+      }
+    }
+
+    return stk.top();
+  }
+};  // 12ms
+
+class Solution {
+ public:
+  int evalRPN(vector<string>& tokens) {
     stack<int> stk;
     int t1, t2;
 
@@ -36,4 +68,4 @@ class Solution {
 
     return stk.top();
   }
-};
+};  // 12ms
