@@ -62,3 +62,23 @@ class Solution {
     return ans;
   }
 };  // 4ms
+
+class Solution {
+ public:
+  int maximumSwap(int num) {
+    string s = to_string(num);
+    priority_queue<char> pq(s.begin(), s.end());
+
+    for (int i = 0; i < s.size(); ++i) {
+      if (s[i] != pq.top()) {
+        auto pos = s.rfind(pq.top());
+        swap(s[i], s[pos]);
+        break;
+      }
+
+      pq.pop();
+    }
+
+    return stoi(s);
+  }
+};  // 4ms
