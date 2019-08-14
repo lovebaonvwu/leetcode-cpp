@@ -71,4 +71,4 @@ class Solution {
 
     return dfs(root->left, 2 * idx, cnt) && dfs(root->right, 2 * idx + 1, cnt);
   }
-};  // 8ms
+};  // 8msg
