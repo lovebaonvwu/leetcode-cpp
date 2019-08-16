@@ -40,3 +40,41 @@ class Solution {
     return ans;
   }
 };  // 16ms
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+  int ans = INT_MAX;
+
+ public:
+  int getMinimumDifference(TreeNode* root) {
+    int prev = -1;
+
+    dfs(root, prev);
+
+    return ans;
+  }
+
+  void dfs(TreeNode* root, int& prev) {
+    if (!root) {
+      return;
+    }
+
+    dfs(root->left, prev);
+
+    if (prev > -1) {
+      ans = min(ans, root->val - prev);
+    }
+
+    prev = root->val;
+
+    dfs(root->right, prev);
+  }
+};  // 16ms
