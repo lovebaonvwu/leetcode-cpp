@@ -4,6 +4,37 @@ class Solution {
     vector<string> ans;
 
     for (const string& w : words) {
+      if (F(w) == F(pattern)) {
+        ans.push_back(w);
+      }
+    }
+
+    return ans;
+  }
+
+  string F(string s) {
+    unordered_map<char, int> mp;
+
+    for (auto& ch : s) {
+      if (!mp.count(ch)) {
+        mp[ch] = mp.size();
+      }
+    }
+
+    for (int i = 0; i < s.size(); ++i) {
+      s[i] = mp[s[i]];
+    }
+
+    return s;
+  }
+};  // 4ms
+
+class Solution {
+ public:
+  vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+    vector<string> ans;
+
+    for (const string& w : words) {
       if (w.size() != pattern.size()) {
         continue;
       }
