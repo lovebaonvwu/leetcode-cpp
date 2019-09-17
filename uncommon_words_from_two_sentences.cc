@@ -1,6 +1,29 @@
 class Solution {
  public:
   vector<string> uncommonFromSentences(string A, string B) {
+    istringstream s{A + " " + B};
+
+    unordered_map<string, int> mp;
+
+    string w;
+    while (s >> w) {
+      mp[w]++;
+    }
+
+    vector<string> ans;
+    for (const auto& m : mp) {
+      if (m.second == 1) {
+        ans.push_back(m.first);
+      }
+    }
+
+    return ans;
+  }
+};  // 0ms
+
+class Solution {
+ public:
+  vector<string> uncommonFromSentences(string A, string B) {
     string s = A + ' ' + B + ' ';
 
     unordered_map<string, int> mp;
