@@ -26,6 +26,29 @@ class Solution {
 class Solution {
  public:
   int longestPalindromeSubseq(string s) {
+    vector<vector<int>> dp(s.size() + 1, vector<int>(s.size() + 1));
+
+    for (int i = s.size(); i >= 1; --i) {
+      for (int j = i; j <= s.size(); ++j) {
+        if (i == j) {
+          dp[i][j] = 1;
+        } else if (s[i - 1] == s[j - 1]) {
+          dp[i][j] = 2 + dp[i + 1][j - 1];
+        } else {
+          dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
+        }
+      }
+    }
+
+    return dp[1][s.size()];
+  }
+};
+// Runtime: 76 ms, faster than 51.15%
+// Memory Usage: 69.4 MB, less than 50.00%
+
+class Solution {
+ public:
+  int longestPalindromeSubseq(string s) {
     if (s.empty()) {
       return 0;
     }
