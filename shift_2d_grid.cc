@@ -10,17 +10,17 @@ class Solution {
 
     for (int i = 0; i < n; ++i) {
       for (int j = 0; j < m; ++j) {
-        int p = (i * m + j + k) % (m * n);
+        int p = (i * m + j - k + m * n) % (m * n);
 
-        ans[p / m][p % m] = grid[i][j];
+        ans[i][j] = grid[p / m][p % m];
       }
     }
 
     return ans;
   }
 };
-// Runtime: 92 ms, faster than 33.33%
-// Memory Usage: 13.2 MB, less than 100.00%
+// Runtime: 68 ms, faster than 100.00%
+// Memory Usage: 13.3 MB, less than 100.00%
 
 class Solution {
  public:
@@ -49,3 +49,27 @@ class Solution {
 };
 // Runtime: 80 ms, faster than 50.00%
 // Memory Usage: 13.4 MB, less than 100.00%
+
+class Solution {
+ public:
+  vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+    int n = grid.size();
+    int m = grid[0].size();
+
+    vector<vector<int>> ans(n, vector<int>(m));
+
+    k %= (m * n);
+
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < m; ++j) {
+        int p = (i * m + j + k) % (m * n);
+
+        ans[p / m][p % m] = grid[i][j];
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 92 ms, faster than 33.33%
+// Memory Usage: 13.2 MB, less than 100.00%
