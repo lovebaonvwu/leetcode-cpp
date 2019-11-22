@@ -1,6 +1,39 @@
 class Solution {
  public:
   string reverseWords(string s) {
+    reverse(s.begin(), s.end());
+
+    int storeIndex = 0;
+
+    for (int i = 0; i < s.size(); ++i) {
+      if (s[i] != ' ') {
+        if (storeIndex != 0) {
+          s[storeIndex++] = ' ';
+        }
+
+        int j = i;
+
+        while (j < s.size() && s[j] != ' ') {
+          s[storeIndex++] = s[j++];
+        }
+
+        reverse(s.begin() + storeIndex - (j - i), s.begin() + storeIndex);
+
+        i = j;
+      }
+    }
+
+    s.erase(s.begin() + storeIndex, s.end());
+
+    return s;
+  }
+};
+// Runtime: 4 ms, faster than 98.62%
+// Memory Usage: 9.6 MB, less than 94.59%
+
+class Solution {
+ public:
+  string reverseWords(string s) {
     istringstream is(s);
 
     string tmp;
