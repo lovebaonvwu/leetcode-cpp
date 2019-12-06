@@ -18,6 +18,50 @@ public:
 class Solution {
  public:
   Node* connect(Node* root) {
+    if (!root) {
+      return root;
+    }
+
+    Node dummy{};
+
+    for (Node *cur = root, *prev = &dummy; cur; cur = cur->next) {
+      if (cur->left) {
+        prev->next = cur->left;
+        prev = prev->next;
+
+        prev->next = cur->right;
+        prev = prev->next;
+      }
+    }
+
+    connect(dummy.next);
+
+    return root;
+  }
+};
+// Runtime: 12 ms, faster than 99.43%
+// Memory Usage: 19.2 MB, less than 100.00%
+
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* next;
+
+    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val, Node* _left, Node* _right, Node* _next)
+        : val(_val), left(_left), right(_right), next(_next) {}
+};
+*/
+class Solution {
+ public:
+  Node* connect(Node* root) {
     Node* head = root;
 
     while (root && root->left) {
@@ -79,6 +123,60 @@ class Solution {
 };
 // Runtime: 24 ms, faster than 97.25%
 // Memory Usage: 19.4 MB, less than 100.00%
+
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* next;
+
+    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val, Node* _left, Node* _right, Node* _next)
+        : val(_val), left(_left), right(_right), next(_next) {}
+};
+*/
+class Solution {
+ public:
+  Node* connect(Node* root) {
+    if (!root) {
+      return root;
+    }
+
+    Node dummy{};
+    Node* prev = &dummy;
+
+    Node* cur = root;
+
+    while (cur) {
+      if (cur->left) {
+        prev->next = cur->left;
+        prev = prev->next;
+
+        prev->next = cur->right;
+        prev = prev->next;
+      }
+
+      cur = cur->next;
+
+      if (!cur) {
+        cur = dummy.next;
+
+        prev->next = nullptr;
+        prev = &dummy;
+      }
+    }
+
+    return root;
+  }
+};
+// Runtime: 24 ms, faster than 97.25%
+// Memory Usage: 19 MB, less than 100.00%
 
 /*
 // Definition for a Node.
