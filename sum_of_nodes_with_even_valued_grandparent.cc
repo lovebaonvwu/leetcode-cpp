@@ -30,6 +30,8 @@ class Solution {
     dfs(root->right, root->val, p);
   }
 };
+// Runtime: 40 ms, faster than 97.30%
+// Memory Usage: 31.4 MB, less than 100.00%
 
 /**
  * Definition for a binary tree node.
