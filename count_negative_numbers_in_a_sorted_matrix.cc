@@ -32,6 +32,52 @@ class Solution {
 
     int ans = 0;
 
+    for (int i = m - 1; i >= 0 && grid[i].back() < 0; --i) {
+      for (int j = n - 1; j >= 0 && grid[i][j] < 0; --j) {
+        ++ans;
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 16 ms, faster than 88.89%
+// Memory Usage: 10.2 MB, less than 100.00%
+
+class Solution {
+ public:
+  int countNegatives(vector<vector<int>>& grid) {
+    size_t m = grid.size();
+    size_t n = grid[0].size();
+
+    int ans = 0;
+
+    int i = m - 1;
+    int j = 0;
+
+    while (i >= 0 && j < n) {
+      if (grid[i][j] < 0) {
+        ans += n - j;
+        --i;
+      } else {
+        ++j;
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 20 ms, faster than 66.67%
+// Memory Usage: 10.2 MB, less than 100.00%
+
+class Solution {
+ public:
+  int countNegatives(vector<vector<int>>& grid) {
+    size_t m = grid.size();
+    size_t n = grid[0].size();
+
+    int ans = 0;
+
     for (int i = 0; i < m; ++i) {
       int lo = 0;
       int hi = n - 1;
