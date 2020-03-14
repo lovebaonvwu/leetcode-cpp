@@ -102,3 +102,15 @@ class Solution {
 };
 // Runtime: 0 ms, faster than 100.00%
 // Memory Usage: 7.6 MB, less than 100.00%
+
+class Solution {
+ public:
+  string customSortString(string S, string T) {
+    sort(T.begin(), T.end(),
+         [&S](char a, char b) { return S.find(a) < S.find(b); });
+
+    return T;
+  }
+};
+// Runtime: 4 ms, faster than 58.49%
+// Memory Usage: 7.8 MB, less than 100.00%
