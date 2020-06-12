@@ -45,3 +45,25 @@ class Solution {
 };
 // Runtime: 504 ms, faster than 87.25%
 // Memory Usage: 82.7 MB, less than 100.00%
+
+class Solution {
+ public:
+  vector<int> getStrongest(vector<int>& arr, int k) {
+    sort(arr.begin(), arr.end());
+
+    int m = arr[(arr.size() - 1) / 2];
+
+    vector<int> ans;
+    for (int i = 0, j = arr.size() - 1; k > 0 && i <= j; --k) {
+      if (m - arr[i] > arr[j] - m) {
+        ans.push_back(arr[i++]);
+      } else {
+        ans.push_back(arr[j--]);
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 488 ms, faster than 94.59%
+// Memory Usage: 82.8 MB, less than 100.00%
