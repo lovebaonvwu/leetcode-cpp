@@ -117,7 +117,6 @@ class Solution {
       int mid = i + (j - i) / 2;
 
       string t = dupString(S, mid);
-      // string t = validate(mid, S);
 
       if (t.length() == 0) {
         j = mid - 1;
