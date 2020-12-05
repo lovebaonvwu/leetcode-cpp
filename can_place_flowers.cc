@@ -18,8 +18,6 @@ class Solution {
       --n;
     }
 
-    cout << n << endl;
-
     return n == 0;
   }
 };
