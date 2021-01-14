@@ -86,3 +86,38 @@ class Solution {
 };
 // Runtime: 120 ms, faster than 100.00%
 // Memory Usage: 98.4 MB, less than 100.00%
+
+class Solution {
+ public:
+  int minOperations(vector<int>& nums, int x) {
+    unordered_map<int, int> mp;
+
+    int sum = 0;
+    for (int i = 0; i < nums.size(); ++i) {
+      mp[sum] = i;
+      sum += nums[i];
+    }
+
+    int ans = INT_MAX;
+
+    if (mp.find(x) != mp.end()) {
+      ans = min(ans, mp[x]);
+    }
+
+    mp[sum] = nums.size();
+
+    int n = nums.size();
+
+    for (int i = n - 1, sum = 0; i >= 0; --i) {
+      sum += nums[i];
+
+      if (mp.find(x - sum) != mp.end() && mp[x - sum] <= i) {
+        ans = min(ans, n - i + mp[x - sum]);
+      }
+    }
+
+    return ans == INT_MAX ? -1 : ans;
+  }
+};
+// Runtime: 436 ms, faster than 61.74%
+// Memory Usage: 168.1 MB, less than 28.83%
