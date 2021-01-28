@@ -70,3 +70,26 @@ class Solution {
 };
 // Runtime: 40 ms, faster than 85.72%
 // Memory Usage: 5.8 MB, less than 99.39%
+
+class Solution {
+ public:
+  int concatenatedBinary(int n) {
+    long ans = 0;
+    const int mod = 1000000007;
+
+    for (int i = 1; i <= n; ++i) {
+      int x = i, len = 0;
+
+      while (x > 0) {
+        ++len;
+        x /= 2;
+      }
+
+      ans = ((ans << len) | i) % mod;
+    }
+
+    return ans % mod;
+  }
+};
+// Runtime: 76 ms, faster than 70.36%
+// Memory Usage: 5.9 MB, less than 99.39%
