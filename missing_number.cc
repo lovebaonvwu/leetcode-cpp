@@ -26,3 +26,19 @@ class Solution {
     return nums.size();
   }
 };  // 32ms
+
+class Solution {
+ public:
+  int missingNumber(vector<int>& nums) {
+    int sum = 0;
+
+    for (int i = 1; i <= nums.size(); ++i) {
+      sum ^= i;
+      sum ^= nums[i - 1];
+    }
+
+    return sum;
+  }
+};
+// Runtime: 12 ms, faster than 98.91%
+// Memory Usage: 18 MB, less than 75.88%
