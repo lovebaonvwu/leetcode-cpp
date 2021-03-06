@@ -55,3 +55,28 @@ class Solution {
 };
 // Runtime: 76 ms, faster than 51.00%
 // Memory Usage: 75.4 MB, less than 21.00%
+
+class Solution {
+ public:
+  int minimumLengthEncoding(vector<string>& words) {
+    for (auto& word : words) {
+      reverse(word.begin(), word.end());
+    }
+
+    sort(words.begin(), words.end());
+
+    int ans = 0;
+
+    for (int i = 0; i < words.size() - 1; ++i) {
+      if (words[i] == (words[i + 1].substr(0, words[i].size()))) {
+        continue;
+      }
+
+      ans += words[i].size() + 1;
+    }
+
+    return ans += words.back().size() + 1;
+  }
+};
+// Runtime: 28 ms, faster than 98.00%
+// Memory Usage: 13.6 MB, less than 98.00%
