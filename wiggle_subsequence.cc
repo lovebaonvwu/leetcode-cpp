@@ -53,3 +53,24 @@ class Solution {
 };
 // Runtime: 0 ms, faster than 100.00%
 // Memory Usage: 6.9 MB, less than 97.17%
+
+class Solution {
+ public:
+  int wiggleMaxLength(vector<int>& nums) {
+    int pos = 0, neg = 0;
+
+    for (int i = 1; i < nums.size(); ++i) {
+      if (nums[i] > nums[i - 1]) {
+        pos = neg + 1;
+      }
+
+      if (nums[i] < nums[i - 1]) {
+        neg = pos + 1;
+      }
+    }
+
+    return max(pos, neg) + 1;
+  }
+};
+// Runtime: 4 ms, faster than 57.03%
+// Memory Usage: 7 MB, less than 97.17%
