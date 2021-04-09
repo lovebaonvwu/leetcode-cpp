@@ -76,3 +76,30 @@ class Solution {
 };
 // Runtime: 40 ms, faster than 83.72%
 // Memory Usage: 30.6 MB, less than 31.99%
+
+class Solution {
+ public:
+  string longestWord(vector<string>& words) {
+    unordered_set<string> st;
+
+    st.insert("");
+
+    sort(words.begin(), words.end());
+
+    string ans;
+
+    for (auto& w : words) {
+      if (st.count(w.substr(0, w.size() - 1))) {
+        st.insert(w);
+
+        if (w.size() > ans.size()) {
+          ans = w;
+        }
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 32 ms, faster than 93.58%
+// Memory Usage: 17.5 MB, less than 85.92%
