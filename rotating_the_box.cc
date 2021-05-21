@@ -31,3 +31,25 @@ class Solution {
 };
 // Runtime: 280 ms, faster than 64.36%
 // Memory Usage: 52.6 MB, less than 57.07%
+
+class Solution {
+ public:
+  vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
+    int row = box.size(), col = box[0].size();
+
+    vector<vector<char>> ans(col, vector<char>(row, '.'));
+
+    for (int i = 0; i < row; ++i) {
+      for (int j = col - 1, k = j; j >= 0; --j) {
+        if (box[i][j] != '.') {
+          k = box[i][j] == '*' ? j : k;
+          ans[k--][row - 1 - i] = box[i][j];
+        }
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 276 ms, faster than 64.96%
+// Memory Usage: 52.6 MB, less than 35.99%
