@@ -146,3 +146,42 @@ class Solution {
   }
 };
 // Time Limit Exceeded
+
+class Solution {
+  vector<int> ans;
+
+ public:
+  vector<int> countSmaller(vector<int>& nums) {
+    int n = nums.size();
+
+    ans.resize(n);
+
+    vector<int> sorted = nums;
+
+    dfs(nums, sorted, 0, n - 1);
+
+    return ans;
+  }
+
+  void dfs(vector<int>& nums, vector<int>& sorted, int start, int end) {
+    if (start == end) {
+      return;
+    }
+
+    int mid = (start + end) / 2;
+
+    dfs(nums, sorted, start, mid);
+    dfs(nums, sorted, mid + 1, end);
+
+    for (int i = start; i <= mid; ++i) {
+      auto iter = lower_bound(sorted.begin() + mid + 1,
+                              sorted.begin() + end + 1, nums[i]);
+
+      ans[i] += iter - (sorted.begin() + mid + 1);
+    }
+
+    sort(sorted.begin() + start, sorted.begin() + end + 1);
+  }
+};
+// Runtime: 652 ms, faster than 37.38%
+// Memory Usage: 74.5 MB, less than 89.70%
