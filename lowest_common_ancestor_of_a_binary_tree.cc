@@ -40,3 +40,36 @@ class Solution {
 };
 // Runtime: 16 ms, faster than 71.23%
 // Memory Usage: 14.4 MB, less than 27.40%
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+ public:
+  TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (!root) {
+      return nullptr;
+    }
+
+    if (root == p || root == q) {
+      return root;
+    }
+
+    auto left = lowestCommonAncestor(root->left, p, q);
+    auto right = lowestCommonAncestor(root->right, p, q);
+
+    if (left && right) {
+      return root;
+    }
+
+    return left ? left : right;
+  }
+};
+// Runtime: 16 ms, faster than 71.23%
+// Memory Usage: 14.3 MB, less than 27.40%
