@@ -43,3 +43,39 @@ class StockPrice {
 // Runtime: 784 ms, faster than 33.41%
 // Memory Usage: 165.6 MB, less than 73.93%
 // 2021.10.21 at 奥盛大厦
+
+class StockPrice {
+  map<int, int> time;
+  multiset<int> p;
+
+ public:
+  StockPrice() {}
+
+  void update(int timestamp, int price) {
+    if (time.find(timestamp) != time.end()) {
+      p.erase(p.find(time[timestamp]));
+    }
+
+    time[timestamp] = price;
+
+    p.insert(price);
+  }
+
+  int current() { return time.rbegin()->second; }
+
+  int maximum() { return *p.rbegin(); }
+
+  int minimum() { return *p.begin(); }
+};
+
+/**
+ * Your StockPrice object will be instantiated and called as such:
+ * StockPrice* obj = new StockPrice();
+ * obj->update(timestamp,price);
+ * int param_2 = obj->current();
+ * int param_3 = obj->maximum();
+ * int param_4 = obj->minimum();
+ */
+// Runtime: 500 ms, faster than 66.22%
+// Memory Usage: 168.7 MB, less than 36.51%
+// 2021.10.21 at 奥盛大厦
