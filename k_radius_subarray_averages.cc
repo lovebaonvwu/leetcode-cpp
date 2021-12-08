@@ -49,4 +49,30 @@ class Solution {
 };
 // Runtime: 281 ms, faster than 26.47%
 // Memory Usage: 138.2 MB, less than 37.28%
-// 2021.12.7 at 奥盛大厦
+// 2021.12.8 at 奥盛大厦
+
+class Solution {
+ public:
+  vector<int> getAverages(vector<int>& nums, int k) {
+    int n = nums.size();
+
+    vector<int> ans(n, -1);
+
+    for (long i = 0, sum = 0, len = 2 * k + 1; i < n; ++i) {
+      sum += nums[i];
+
+      if (i >= len) {
+        sum -= nums[i - len];
+      }
+
+      if (i >= len - 1) {
+        ans[i - k] = sum / len;
+      }
+    }
+
+    return ans;
+  }
+};
+// Runtime: 274 ms, faster than 29.27%
+// Memory Usage: 129.9 MB, less than 66.75%
+// 2021.12.8 at 奥盛大厦
