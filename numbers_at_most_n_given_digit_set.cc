@@ -58,3 +58,39 @@ class Solution {
 };
 // Runtime: 0 ms, faster than 100.00%
 // Memory Usage: 8.5 MB, less than 25.11%
+
+class Solution {
+ public:
+  int atMostNGivenDigitSet(vector<string>& digits, int n) {
+    unordered_set<int> st;
+
+    for (auto d : digits) {
+      st.insert(d[0] - '0');
+    }
+
+    int ans = 0;
+
+    for (int i = 1; i <= n; ++i) {
+      bool flag = true;
+
+      int t = i;
+
+      while (t > 0) {
+        if (st.find(t % 10) == st.end()) {
+          flag = false;
+          break;
+        }
+
+        t /= 10;
+      }
+
+      if (flag) {
+        ++ans;
+      }
+    }
+
+    return ans;
+  }
+};
+// Time Limit Exceeded
+// 2021.12.18 at 茗筑美嘉
