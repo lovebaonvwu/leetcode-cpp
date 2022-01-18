@@ -17,3 +17,21 @@ class Solution {
 // Runtime: 0 ms, faster than 100.00%
 // Memory Usage: 6.9 MB, less than 62.94%
 // 2022.1.18 at 奥盛大厦
+
+class Solution {
+ public:
+  vector<string> divideString(string s, int k, char fill) {
+    int n = s.size();
+
+    vector<string> ans((n + k - 1) / k, string(k, fill));
+
+    for (int i = 0; i < n; ++i) {
+      ans[i / k][i % k] = s[i];
+    }
+
+    return ans;
+  }
+};
+// Runtime: 7 ms, faster than 21.85%
+// Memory Usage: 6.9 MB, less than 62.94%
+// 2022.1.18 at 奥盛大厦
