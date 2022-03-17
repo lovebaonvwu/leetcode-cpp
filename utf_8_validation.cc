@@ -74,3 +74,35 @@ class Solution {
 // Runtime: 23 ms, faster than 31.29%
 // Memory Usage: 14 MB, less than 30.65%
 // 2022.3.17 at 奥盛大厦
+
+class Solution {
+ public:
+  bool validUtf8(vector<int>& data) {
+    int count = 0;
+
+    for (auto c : data) {
+      if (count == 0) {
+        if ((c >> 5) == 0b110) {
+          count = 1;
+        } else if ((c >> 4) == 0b1110) {
+          count = 2;
+        } else if ((c >> 3) == 0b11110) {
+          count = 3;
+        } else if ((c >> 7) == 0b1) {
+          return false;
+        }
+      } else {
+        if ((c >> 6) != 0b10) {
+          return false;
+        }
+
+        --count;
+      }
+    }
+
+    return count == 0;
+  }
+};
+// Runtime: 22 ms, faster than 33.55%
+// Memory Usage: 14.1 MB, less than 30.65%
+// 2022.3.17 at 奥盛大厦
