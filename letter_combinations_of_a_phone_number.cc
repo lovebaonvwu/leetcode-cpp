@@ -69,3 +69,44 @@ class Solution {
     return ans;
   }
 };  // 4ms
+
+class Solution {
+ public:
+  vector<string> letterCombinations(string digits) {
+    if (digits.empty()) {
+      return {};
+    }
+
+    string mp[10] = {"",    "",    "abc",  "def", "ghi",
+                     "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+    vector<string> ans;
+
+    queue<string> q;
+    q.push("");
+
+    for (int i = 0; i < digits.size(); ++i) {
+      string arr = mp[digits[i] - '0'];
+
+      int cnt = q.size();
+      while (cnt-- > 0) {
+        string tmp = q.front();
+        q.pop();
+
+        for (int j = 0; j < arr.size(); ++j) {
+          q.push(tmp + arr[j]);
+        }
+      }
+    }
+
+    while (!q.empty()) {
+      ans.push_back(q.front());
+      q.pop();
+    }
+
+    return ans;
+  }
+};
+// Runtime: 5 ms, faster than 16.72%
+// Memory Usage: 6.5 MB, less than 84.83%
+// 2022.5.9 at 奥盛大厦
