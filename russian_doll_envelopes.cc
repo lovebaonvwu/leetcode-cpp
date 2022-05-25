@@ -110,3 +110,35 @@ class Solution {
 };
 // Runtime: 916 ms, faster than 51.14%
 // Memory Usage: 16.2 MB, less than 80.16%
+
+class Solution {
+ public:
+  int maxEnvelopes(vector<vector<int>>& envelopes) {
+    vector<vector<int>>& e = envelopes;
+
+    sort(e.begin(), e.end(), [](auto& a, auto& b) {
+      if (a[0] == b[0]) {
+        return a[1] > b[1];
+      } else {
+        return a[0] < b[0];
+      }
+    });
+
+    vector<int> env;
+
+    for (auto& n : e) {
+      auto it = lower_bound(env.begin(), env.end(), n[1]);
+
+      if (it == env.end()) {
+        env.push_back(n[1]);
+      } else {
+        *it = n[1];
+      }
+    }
+
+    return env.size();
+  }
+};
+// Runtime: 436 ms, faster than 67.71%
+// Memory Usage: 77.4 MB, less than 91.99%
+// 2022.5.25 at 奥盛大厦
