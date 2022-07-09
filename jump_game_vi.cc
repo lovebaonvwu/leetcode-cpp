@@ -48,3 +48,26 @@ class Solution {
 };
 // Runtime: 172 ms, faster than 53.04%
 // Memory Usage: 77.8 MB, less than 81.94%
+
+class Solution {
+ public:
+  int maxResult(vector<int>& nums, int k) {
+    int n = nums.size();
+
+    vector<int> dp(n, INT_MIN);
+
+    dp[0] = nums[0];
+
+    for (int i = 0; i < n; ++i) {
+      for (int j = 1; j <= k && j + i < n; ++j) {
+        dp[i + j] = max(dp[i + j], dp[i] + nums[i + j]);
+        if (nums[i + j] >= 0) {
+          break;
+        }
+      }
+    }
+
+    return dp.back();
+  }
+};
+// Time Limit Exceeded
