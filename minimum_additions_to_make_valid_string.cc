@@ -52,3 +52,22 @@ class Solution {
 };
 // Runtime 5 ms
 // Memory 7.4 MB
+
+class Solution {
+ public:
+  int addMinimum(string word) {
+    char prev = 'z', cnt = 0;
+
+    for (auto c : word) {
+      if (c <= prev) {
+        ++cnt;
+      }
+
+      prev = c;
+    }
+
+    return cnt * 3 - word.size();
+  }
+};
+// Runtime 0 ms
+// Memory 6.3 MB
