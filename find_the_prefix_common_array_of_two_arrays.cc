@@ -22,3 +22,27 @@ class Solution {
 };
 // Runtime 78 ms
 // Memory 83.8 MB
+
+class Solution {
+ public:
+  vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+    int cnt[51] = {0};
+    vector<int> ans;
+
+    for (int i = 0, c = 0; i < A.size(); ++i) {
+      if (++cnt[A[i]] == 2) {
+        ++c;
+      }
+
+      if (++cnt[B[i]] == 2) {
+        ++c;
+      }
+
+      ans.push_back(c);
+    }
+
+    return ans;
+  }
+};
+// Runtime 47 ms
+// Memory 81.3 MB
