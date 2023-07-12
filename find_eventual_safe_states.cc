@@ -73,3 +73,36 @@ class Solution {
 };
 // Runtime 1027 ms
 // Memory 146.6 MB
+
+class Solution {
+  unordered_map<int, bool> safe;
+  vector<int> ans;
+
+ public:
+  vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+    for (int i = 0; i < graph.size(); ++i) {
+      if (dfs(graph, i)) {
+        ans.push_back(i);
+      }
+    }
+
+    return ans;
+  }
+
+  bool dfs(const vector<vector<int>>& g, int i) {
+    if (safe.find(i) != safe.end()) {
+      return safe[i];
+    }
+
+    safe[i] = false;
+    for (auto next : g[i]) {
+      if (!dfs(g, next)) {
+        return safe[i];
+      }
+    }
+
+    return safe[i] = true;
+  }
+};
+// Runtime 183 ms
+// Memory 54 MB
