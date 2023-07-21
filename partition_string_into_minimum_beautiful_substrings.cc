@@ -40,3 +40,36 @@ class Solution {
 };
 // 11ms
 // 6.37mb
+
+class Solution {
+ public:
+  int minimumBeautifulSubstrings(string s) {
+    unordered_set<string> st;
+    st.insert("1");
+    st.insert("101");
+    st.insert("11001");
+    st.insert("1111101");
+    st.insert("1001110001");
+    st.insert("110000110101");
+    st.insert("11110100001001");
+
+    int n = s.size();
+    vector<int> dp(n + 1, INT_MAX / 2);
+    dp[n] = 0;
+    for (int i = n - 1; i >= 0; --i) {
+      if (s[i] == '0') {
+        continue;
+      }
+
+      for (int j = i; j < n; ++j) {
+        if (st.find(s.substr(i, j - i + 1)) != st.end()) {
+          dp[i] = min(dp[i], 1 + dp[j + 1]);
+        }
+      }
+    }
+
+    return dp[0] >= INT_MAX / 2 ? -1 : dp[0];
+  }
+};
+// 10ms
+// 6.49mb
