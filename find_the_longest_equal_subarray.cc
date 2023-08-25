@@ -21,3 +21,21 @@ class Solution {
 };
 // 383ms
 // 226.52MB
+
+class Solution {
+ public:
+  int longestEqualSubarray(vector<int>& nums, int k) {
+    unordered_map<int, int> mp;
+    int ans = 0;
+    for (int i = 0, j = 0; j < nums.size(); ++j) {
+      ans = max(ans, ++mp[nums[j]]);
+      if (j - i + 1 - ans > k) {
+        --mp[nums[i++]];
+      }
+    }
+
+    return ans;
+  }
+};
+// 244ms
+// 178.88MB
