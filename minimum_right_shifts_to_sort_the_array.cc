@@ -17,3 +17,25 @@ class Solution {
 };
 // 4ms
 // 23.02MB
+
+class Solution {
+ public:
+  int minimumRightShifts(vector<int>& nums) {
+    bool valley = nums[0] <= nums.back();
+    int j = -1;
+    for (int i = 1; i < nums.size(); ++i) {
+      if (nums[i] < nums[i - 1]) {
+        if (valley) {
+          return -1;
+        } else {
+          j = i;
+          valley = true;
+        }
+      }
+    }
+
+    return valley && nums[0] <= nums.back() ? 0 : nums.size() - j;
+  }
+};
+// 0 ms
+// 23 MB
