@@ -22,37 +22,27 @@ class Solution {
 
 class Solution {
  public:
-  int minLengthAfterRemovals(vector<int>& nums) {
-    unordered_map<int, int> cnt;
-    for (auto n : nums) {
-      ++cnt[n];
-    }
+  int countPairs(vector<vector<int>>& coordinates, int k) {
+    int ans = 0;
+    int n = coordinates.size();
+    for (int i = 0; i <= k; ++i) {
+      unordered_map<long long, int> mp;
+      for (auto& c : coordinates) {
+        long long x0 = c[0];
+        long long y0 = c[1];
+        long long x1 = i ^ x0;
+        long long y1 = (k - i) ^ y0;
 
-    priority_queue<int> pq;
-    for (auto& [_, c] : cnt) {
-      pq.push(c);
-    }
+        if (mp.find(x1 * 1000000 + y1) != mp.end()) {
+          ans += mp[x1 * 1000000 + y1];
+        }
 
-    while (pq.size() >= 2) {
-      auto i = pq.top();
-      pq.pop();
-      auto j = pq.top();
-      pq.pop();
-
-      i -= 1;
-      j -= 1;
-
-      if (i > 0) {
-        pq.push(i);
-      }
-
-      if (j > 0) {
-        pq.push(j);
+        ++mp[x0 * 1000000 + y0];
       }
     }
 
-    return pq.size() ? pq.top() : 0;
+    return ans;
   }
 };
-// 250ms
-// 166.60MB
+// 1422ms
+// 478.71MB
