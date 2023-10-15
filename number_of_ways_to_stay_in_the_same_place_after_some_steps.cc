@@ -76,3 +76,28 @@ class Solution {
 };
 // 29ms
 // 13.95MB
+
+class Solution {
+ public:
+  int numWays(int steps, int arrLen) {
+    int mod = 1e9 + 7;
+    int len = min(steps + 1, arrLen);
+    vector<vector<int>> dp(steps + 1, vector<int>(len));
+    dp[0][0] = 1;
+    for (int i = 1; i <= steps; ++i) {
+      for (int j = len - 1; j >= 0; --j) {
+        dp[i][j] = (dp[i][j] + dp[i - 1][j]) % mod;
+        if (j < len - 1) {
+          dp[i][j] = (dp[i][j] + dp[i - 1][j + 1]) % mod;
+        }
+        if (j > 0) {
+          dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % mod;
+        }
+      }
+    }
+
+    return dp[steps][0];
+  }
+};
+// 44ms
+// 13.29MB
