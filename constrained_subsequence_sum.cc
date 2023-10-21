@@ -18,3 +18,27 @@ class Solution {
   }
 };
 // Time Limit Exceeded
+
+class Solution {
+ public:
+  int constrainedSubsetSum(vector<int>& nums, int k) {
+    priority_queue<pair<int, int>> pq;
+    int n = nums.size();
+    pq.push({nums[0], 0});
+    int ans = nums[0];
+
+    for (int i = 1; i < n; ++i) {
+      while (i - pq.top().second > k) {
+        pq.pop();
+      }
+
+      int cur = max(0, pq.top().first) + nums[i];
+      ans = max(ans, cur);
+      pq.push({cur, i});
+    }
+
+    return ans;
+  }
+};
+// 282 ms
+// 139.5 MB
