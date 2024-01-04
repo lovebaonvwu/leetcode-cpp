@@ -12,3 +12,22 @@ class Solution {
 };
 // 102ms
 // 66.91MB
+
+class Solution {
+ public:
+  int getMaximumConsecutive(vector<int>& coins) {
+    sort(begin(coins), end(coins));
+
+    int sum = 0;
+    for (auto c : coins) {
+      if (c <= sum + 1)
+        sum += c;
+      else
+        break;
+    }
+
+    return sum + 1;
+  }
+};
+// 96ms
+// 67.16MB
