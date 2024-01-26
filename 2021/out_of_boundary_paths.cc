@@ -33,3 +33,40 @@ class Solution {
 };
 // Runtime: 32 ms, faster than 22.48%
 // Memory Usage: 9.5 MB, less than 39.26%
+
+class Solution {
+ public:
+  int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+    int dp[51][51][51]{0};
+    memset(dp, -1, sizeof(dp));
+
+    int mod = 1e9 + 7;
+
+    int dirs[] = {0, 1, 0, -1, 0};
+
+    function<int(int, int, int)> dfs = [&](int moves, int i, int j) -> int {
+      if (i < 0 || i == m || j < 0 || j == n)
+        return 1;
+      if (moves == 0)
+        return 0;
+
+      if (dp[moves][i][j] != -1) {
+        return dp[moves][i][j];
+      }
+
+      int res = 0;
+      for (int k = 0; k < 4; ++k) {
+        int y = i + dirs[k];
+        int x = j + dirs[k + 1];
+
+        res = (res + dfs(moves - 1, y, x)) % mod;
+      }
+
+      return dp[moves][i][j] = res;
+    };
+
+    return dfs(maxMove, startRow, startColumn);
+  }
+};
+// 3ms
+// 8.93MB
