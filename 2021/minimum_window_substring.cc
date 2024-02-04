@@ -47,3 +47,42 @@ class Solution {
 // Runtime: 8 ms, faster than 88.32%
 // Memory Usage: 7.8 MB, less than 65.85%
 // 2021.8.15 at 茗筑美嘉
+
+class Solution {
+  bool valid(const vector<int>& ss, const vector<int>& tt) {
+    for (int i = 0; i < 128; ++i) {
+      if (ss[i] < tt[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+ public:
+  string minWindow(string s, string t) {
+    vector<int> tt(128);
+    for (auto c : t) {
+      ++tt[c];
+    }
+
+    vector<int> ss(128);
+    int curlen = INT_MAX;
+    int curindex = -1;
+    for (int i = 0, j = 0; i < s.size(); ++i) {
+      ++ss[s[i]];
+
+      while (valid(ss, tt)) {
+        if ((i - j + 1) < curlen) {
+          curindex = j;
+          curlen = i - j + 1;
+        }
+
+        --ss[s[j]];
+        ++j;
+      }
+    }
+
+    return curindex == -1 ? "" : s.substr(curindex, curlen);
+  }
+};
