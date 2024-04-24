@@ -12,13 +12,6 @@ class Solution {
       }
     }
 
-    // vector<int> ret;
-    // for (int i = 0; i <= n; ++i) {
-    //     if (primes[i]) {
-    //         ret.push_back(i);
-    //     }
-    // }
-
     return primes;
   }
 
