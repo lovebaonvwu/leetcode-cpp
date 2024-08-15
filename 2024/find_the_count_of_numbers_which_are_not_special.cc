@@ -73,3 +73,39 @@ public:
 };
 // 74 ms
 // 15.75 MB
+
+class Solution {
+public:
+    int nonSpecialCount(int l, int r) {
+        int n = sqrt(r);
+        vector<bool> prime(n + 1, true);
+        prime[0] = false;
+        prime[1] = false;
+
+        for (int i = 2; i * i <= n; ++i) {
+            if (prime[i]) {
+                for (int j = i * i; j <= n; j += i) {
+                    prime[j] = false;
+                }
+            }
+        }
+
+        vector<int> p;
+        for (int i = 0; i <= n; ++i) {
+            if (prime[i]) {
+                p.push_back(i);
+            }
+        }
+
+        int cnt = 0;
+        for (int n : p) {
+            if (n * n >= l && n * n <= r) {
+                ++cnt;
+            }
+        }
+
+        return r - l + 1 - cnt;
+    }
+};
+// 68 ms
+// 15.70 MB
