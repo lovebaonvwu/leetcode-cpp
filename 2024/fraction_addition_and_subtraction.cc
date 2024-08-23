@@ -24,7 +24,6 @@ public:
                 before = true;
                 num = 0;
             } else if (expression[i] == '/') {
-                cout << "i: " << i << ", num: " << num << endl;
                 numerators.push_back(num);
                 before = false;
                 num = 0;
