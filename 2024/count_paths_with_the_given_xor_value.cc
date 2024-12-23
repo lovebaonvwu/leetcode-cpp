@@ -33,3 +33,40 @@ public:
 };
 // 380 ms
 // 102.11 MB
+
+class Solution {
+public:
+    int countPathsWithXorValue(vector<vector<int>>& grid, int k) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int mod = 1e9 + 7;
+
+        vector<vector<vector<int>>> dp(m, vector<vector<int>>(n, vector<int>(16)));
+
+        dp[0][0][grid[0][0]] = 1;
+        for (int i = 1; i < m; ++i) {
+            for (int v = 0; v < 16; ++v) {
+                dp[i][0][v] = dp[i - 1][0][grid[i][0] ^ v];
+            }
+        }
+        for (int j = 1; j < n; ++j) {
+            for (int v = 0; v < 16; ++v) {
+                dp[0][j][v] = dp[0][j - 1][grid[0][j] ^ v];
+            }
+        }
+
+        for (int i = 1; i < m; ++i) {
+            for (int j = 1; j < n; ++j) {
+                for (int v = 0; v < 16; ++v) {
+                    dp[i][j][v] = (dp[i][j][v] + dp[i - 1][j][grid[i][j] ^ v]) % mod;
+                    dp[i][j][v] = (dp[i][j][v] + dp[i][j - 1][grid[i][j] ^ v]) % mod;
+                }
+            }
+        }
+
+        return dp[m - 1][n - 1][k];
+    }
+};
+// 139 ms
+// 101.60 MB
+
