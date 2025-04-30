@@ -127,5 +127,5 @@ public:
         return dfs(1, 0, n, cached, indegree, g, score);
     }
 };
-// Time: O(n!)
+// Time: O(n * 2^n)
 // Space: O(n)
