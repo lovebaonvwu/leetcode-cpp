@@ -32,3 +32,33 @@ public:
 };
 // Time: O(n)
 // Space: O(n)
+
+class Solution
+{
+public:
+    int countTrapezoids(vector<vector<int>> &points)
+    {
+        unordered_map<int, long long> freq;
+        int mod = 1e9 + 7;
+
+        for (auto &point : points)
+        {
+            ++freq[point[1]];
+        }
+
+        long long ans = 0;
+        long long sum = 0;
+
+        for (auto [_, v] : freq)
+        {
+            long long t = (v - 1 + 1) * (v - 1) / 2;
+            ans += (t * sum);
+            sum += t;
+            ans %= mod;
+        }
+
+        return ans;
+    }
+};
+// Time: O(n)
+// Space: O(n)
